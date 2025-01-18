@@ -1,0 +1,79 @@
+<template>
+  <!-- 结构 -->
+  <div class="father">
+    <h2>Father</h2>
+
+    <Category>
+      <template v-slot:s2>
+        <ul>
+          <li v-for="game in gameList" :key="game.id">
+            <h4>{{ game.title }}</h4>
+            <p>{{ game.id }}</p>
+          </li>
+        </ul>
+      </template>
+
+      <template v-slot:s1>
+        <h2>热门游戏推荐</h2>
+      </template>
+    </Category>
+
+    <Category>
+      <template v-slot:s1>
+        <h2>今日美食推荐</h2>
+      </template>
+
+      <template v-slot:s2>
+        <!-- <img src="@/assets/genshin.jpg" alt=""> -->
+        <img :src="food" alt="" />
+      </template>
+    </Category>
+
+    <Category>
+      <template #s1>
+        <h2>今日电影推荐</h2>
+      </template>
+      <template #s2>
+        {{ movie }}
+      </template>
+    </Category>
+  </div>
+</template>
+
+<script lang="ts" setup name="Father">
+// 脚本
+import { nanoid } from "nanoid";
+import Category from "./Category.vue";
+import { ref, reactive } from "vue";
+// 数据
+// 热门游戏列表
+let gameList = ref([
+  {
+    id: nanoid(),
+    title: "Overwatch",
+  },
+  {
+    id: nanoid(),
+    title: "Valorant",
+  },
+  {
+    id: nanoid(),
+    title: "Counter-Strike",
+  },
+  {
+    id: nanoid(),
+    title: "Minecraft",
+  },
+]);
+// 今日美食推荐
+let food = ref("./src/assets/genshin.jpg");
+// 今日电影推荐
+let movie = ref("好看的");
+</script>
+
+<style scoped>
+/* 样式 */
+img {
+  height: 300px;
+}
+</style>
